@@ -1,0 +1,1 @@
+GPU: None\nVRAM: 0 GB\nPyTorch: 2.9.1+cpu\nCUDA Available: False

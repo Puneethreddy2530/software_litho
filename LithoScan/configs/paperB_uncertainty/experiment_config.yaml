@@ -1,0 +1,76 @@
+# =============================================================================
+# LithoScan Paper B: Uncertainty-Aware Lithology Classification Protocol Config
+# =============================================================================
+
+protocol_version: "1.0"
+date: "October 2026"
+seed: 2026
+
+benchmarks:
+  primary:
+    name: "DCID-35"
+    num_classes: 35
+    manifest: "configs/paperB_uncertainty/paperB_split_manifest_dcid35.json"
+    models:
+      resnet50:
+        checkpoint: "checkpoints/exp_B/best_model.pt"
+        architecture: "resnet50"
+      cnn_only:
+        checkpoint: "checkpoints/phase5/dcid35_cnn_only/best_model.pt"
+        architecture: "server_fusion_cnn_only"
+        embed_dim: 512
+  replication:
+    name: "DCID-7"
+    num_classes: 7
+    manifest: "configs/paperB_uncertainty/paperB_split_manifest_dcid7.json"
+    models:
+      resnet50:
+        checkpoint: "checkpoints/exp_A/best_model.pt"
+        architecture: "resnet50"
+      cnn_only:
+        checkpoint: "checkpoints/phase4/dcid7_cnn_only/best_model.pt"
+        architecture: "server_fusion_cnn_only"
+        embed_dim: 512
+
+preprocessing:
+  image_size: 512
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+  batch_size: 16
+  num_workers: 4
+
+calibration:
+  methods:
+    - "uncalibrated"
+    - "temperature_scaling"
+  ece_bins: 15
+  ece_strategy: "uniform"
+  ece_adaptive_bins: 15
+
+selective_classification:
+  scoring_functions:
+    - "msp"      # Maximum Softmax Probability
+    - "entropy"  # Negative Shannon Entropy: sum(p * log p)
+    - "margin"   # Top-1 minus Top-2 probability
+  target_risks: [0.01, 0.05, 0.10] # Operating points
+
+conformal_prediction:
+  nonconformity_score: "hinge" # 1 - \hat{p}_y
+  miscoverage_rates: [0.01, 0.05, 0.10] # alpha
+
+domain_mismatch_protocol:
+  pipeline_A:
+    description: "Clean-Calibrated Pipeline"
+    calibration_set: "cal_clean"
+    evaluation_sets: ["eval_clean", "eval_def"]
+  pipeline_B:
+    description: "Domain-Matched Defective-Calibrated Pipeline"
+    calibration_set: "cal_def"
+    evaluation_sets: ["eval_def"]
+
+statistical_tests:
+  bootstrap_replicates: 2000
+  ci_level: 0.95
+  paired_tests:
+    - "mcnemar"
+    - "wilcoxon"

@@ -1,0 +1,20 @@
+{
+  "best_epoch": 16,
+  "total_epochs_run": 23,
+  "training_time_seconds": 18338.8696038723,
+  "peak_cuda_memory_mb": 1346.2119140625,
+  "parameter_count": 24560711,
+  "trainable_parameter_count": 24560711,
+  "validation_best_acc": 1.0,
+  "validation_best_f1": 1.0,
+  "test_clean_accuracy": 0.9995714285714286,
+  "test_clean_macro_f1": 0.999571428285714,
+  "test_noise_accuracy": 0.96,
+  "test_noise_macro_f1": 0.9605370288258088,
+  "noise_absolute_drop": 0.03957142857142859,
+  "noise_relative_drop": 0.039588395026439925,
+  "test_masked_accuracy": 0.996,
+  "test_masked_macro_f1": 0.9960032470473552,
+  "mask_absolute_drop": 0.0035714285714285587,
+  "mask_relative_drop": 0.0035729598399313867
+}

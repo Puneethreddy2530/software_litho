@@ -1,0 +1,124 @@
+{
+  "verification_type": "ENGINEERING_SMOKE_TEST",
+  "notice": "All metrics in this report are for software/hardware engineering validation only, not research results.",
+  "device": "cuda",
+  "gpu_name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+  "dataset_samples": {
+    "train_samples": 28,
+    "val_samples": 28,
+    "classes": 7,
+    "samples_per_class": 4
+  },
+  "snn_single_epoch": {
+    "num_params": 390695,
+    "train_loss": 1.8096,
+    "val_loss": 1.9467,
+    "val_acc": 0.1429,
+    "val_macro_f1": 0.0357,
+    "epoch_duration_sec": 1.0935,
+    "activity_summary": {
+      "time_steps": 4,
+      "mean_firing_rate": 0.014136,
+      "weighted_firing_rate": 0.014136,
+      "layer_rates": {
+        "block1_lif": 0.049754,
+        "block2_lif": 0.006188,
+        "block3_lif": 0.000602,
+        "block4_lif": 1e-06
+      },
+      "layer_spikes": {
+        "block1_lif": 8947265,
+        "block2_lif": 556405,
+        "block3_lif": 27071,
+        "block4_lif": 22
+      },
+      "layer_positions": {
+        "block1_lif": 179830784,
+        "block2_lif": 89915392,
+        "block3_lif": 44957696,
+        "block4_lif": 22478848
+      }
+    }
+  },
+  "ann_single_epoch": {
+    "num_params": 390695,
+    "train_loss": 1.9169,
+    "val_loss": 1.8224,
+    "val_acc": 0.4286,
+    "val_macro_f1": 0.3176,
+    "epoch_duration_sec": 0.193,
+    "activity_summary": null
+  },
+  "checkpoint_resumption_verification": {
+    "epochs_completed": 2,
+    "epoch_1_val_f1": 0.03571428571428571,
+    "epoch_2_val_f1": 0.03686635944700461,
+    "best_epoch": 2,
+    "best_val_f1": 0.03686635944700461,
+    "cumulative_duration_sec": 2.1478,
+    "history_intact": true,
+    "tamper_detection_verified": true
+  },
+  "standardized_latency": {
+    "snn": {
+      "gpu": {
+        "median_ms": 8.527679920196533,
+        "p95_ms": 9.162803363800048,
+        "mean_ms": 8.614649600982666,
+        "std_ms": 0.33591261402675016,
+        "iterations": 200,
+        "warmup": 50,
+        "batch_size": 1
+      },
+      "cpu_single_thread": {
+        "median_ms": 136.1540500074625,
+        "p95_ms": 138.99345497775357,
+        "mean_ms": 136.53881199890748,
+        "std_ms": 3.108536208846319,
+        "iterations": 50,
+        "warmup": 20,
+        "batch_size": 1
+      }
+    },
+    "ann_matched": {
+      "gpu": {
+        "median_ms": 0.9138559997081757,
+        "p95_ms": 1.5995392203330994,
+        "mean_ms": 0.989541600048542,
+        "std_ms": 0.23761883257842115,
+        "iterations": 200,
+        "warmup": 50,
+        "batch_size": 1
+      },
+      "cpu_single_thread": {
+        "median_ms": 31.038500019349158,
+        "p95_ms": 32.347585013485514,
+        "mean_ms": 31.134515999583527,
+        "std_ms": 0.6555749185035388,
+        "iterations": 50,
+        "warmup": 20,
+        "batch_size": 1
+      }
+    }
+  },
+  "theoretical_energy_proxy": {
+    "energy_physically_measured": false,
+    "measurement_note": "Energy was not directly measured. Values represent theoretical CMOS 45nm arithmetic operation proxy only.",
+    "time_steps": 4,
+    "e_snn_total_microjoules": 851.2457,
+    "e_ann_total_microjoules": 3390.1314,
+    "theoretical_energy_ratio_snn_to_ann": 0.2511,
+    "layer_1_encoding_cost_pct": 93.71,
+    "membrane_update_cost_pct": 0.76,
+    "internal_sop_cost_pct": 5.53
+  },
+  "checks_passed": {
+    "snn_finite_loss_and_grads": true,
+    "ann_finite_loss_and_grads": true,
+    "exact_parameter_match": true,
+    "multi_batch_spike_accumulation": true,
+    "resumption_epoch_continuity": true,
+    "cumulative_duration_tracking": true,
+    "tamper_detection": true
+  }
+}

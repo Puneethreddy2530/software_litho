@@ -1,0 +1,11 @@
+Benchmark,Partition,Source Directory,Total Images,Images/Class,Role
+DCID-35,Model Fitting ($D_{\text{fit}}$),DCID-512-35/train [:25200],"25,200",720,Historical Weight Fitting
+DCID-35,Model Selection ($D_{\text{sel}}$),DCID-512-35/train [25200:],"2,799",~80,Historical Model Selection
+DCID-35,"Clean Calibration ($D_{\text{cal,clean}}$)",DCID-512-35/test [:50],"1,750",50,Clean Probability & Conformal Calibration
+DCID-35,"Clean Evaluation ($D_{\text{eval,clean}}$)",DCID-512-35/test [50:],"5,250",150,Locked Clean Benchmark Evaluation
+DCID-35,"Defective Calibration ($D_{\text{cal,def}}$)",noise-512-35/train [:100],"3,500",100,Domain-Matched Calibration (Untouched Pool)
+DCID-35,"Defective Evaluation ($D_{\text{eval,def}}$)",noise-512-35/test [full],"2,800",80,Locked Defective Benchmark Evaluation
+DCID-7,"Clean Calibration ($D_{\text{cal,clean}}$)",DCID-512-7/test [:250],"1,750",250,Clean Calibration (Replication)
+DCID-7,"Clean Evaluation ($D_{\text{eval,clean}}$)",DCID-512-7/test [250:],"5,250",750,Clean Evaluation (Replication)
+DCID-7,"Defective Calibration ($D_{\text{cal,def}}$)",noise-512-7/train [:400],"2,800",400,Defective Calibration (Replication)
+DCID-7,"Defective Evaluation ($D_{\text{eval,def}}$)",noise-512-7/test [full],"2,800",400,Defective Evaluation (Replication)

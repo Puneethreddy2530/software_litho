@@ -1,0 +1,7 @@
+Model,Intervention,Clean_Acc,Intervened_Acc,Absolute_Drop
+ResNet-50,40px_Border_Mask,1.0000,0.9994,0.0006
+CNN-only,40px_Border_Mask,0.9996,0.9960,0.0036
+CNN-Transformer,40px_Border_Mask,0.9994,0.9984,0.0010
+ResNet-50,Official_Noise_Variant,1.0000,0.9679,0.0321
+CNN-only,Official_Noise_Variant,0.9996,0.9600,0.0396
+CNN-Transformer,Official_Noise_Variant,0.9994,0.9664,0.0330

@@ -1,0 +1,42 @@
+path,role,description,size_bytes,last_modified,status
+checkpoints/exp_A/best_model.pt,Trained Model Checkpoint,Phase 2A ResNet-50 7-class Best Weights,94408062,2026-09-13T18:52:23.781901598,Verified on Disk
+checkpoints/exp_A/metrics.json,Metric Artifact,Phase 2A ResNet-50 Summary Metrics,258,2026-09-13T20:20:17.286536694,Verified on Disk
+checkpoints/exp_A/training.log,Log File,Phase 2A ResNet-50 Training Console Log,2560,2026-09-13T20:18:53.538788319,Verified on Disk
+checkpoints/exp_A/training_history.csv,Training History,Phase 2A Epoch-by-Epoch Loss/Acc,791,2026-09-13T20:20:17.286536694,Verified on Disk
+checkpoints/exp_B/best_model.pt,Trained Model Checkpoint,Phase 2B ResNet-50 35-class Best Weights,94637566,2026-09-13T21:09:33.747936487,Verified on Disk
+checkpoints/exp_B/metrics.json,Metric Artifact,Phase 2B ResNet-50 Summary Metrics,315,2026-09-13T22:13:40.853519201,Verified on Disk
+checkpoints/exp_B/training.log,Log File,Phase 2B ResNet-50 Training Console Log,2210,2026-09-13T22:12:16.112198353,Verified on Disk
+checkpoints/exp_B/training_history.csv,Training History,Phase 2B Epoch-by-Epoch Loss/Acc,704,2026-09-13T22:13:40.859897852,Verified on Disk
+checkpoints/phase4/dcid7_cnn_only/best_model.pt,Trained Model Checkpoint,Phase 4 CNN-only 7-class Best Weights,98563968,2026-09-14T14:20:16.100632906,Verified on Disk
+checkpoints/phase4/dcid7_server/best_model.pt,Trained Model Checkpoint,Phase 4 CNN-Transformer 7-class Best Weights,124316697,2026-09-14T07:44:00.443462610,Verified on Disk
+checkpoints/phase5/dcid35_cnn_only/best_model.pt,Trained Model Checkpoint,Phase 5A CNN-only 35-class Best Weights,98621440,2026-09-16T07:31:52.010783672,Verified on Disk
+checkpoints/phase5/dcid35_server/best_model.pt,Trained Model Checkpoint,Phase 5A CNN-Transformer 35-class Best Weights,124374169,2026-09-15T18:45:53.627850294,Verified on Disk
+checkpoints/phase5/archive_dcid35_server_interrupted_epoch4/best_model.pt,Archived Checkpoint,Interrupted Phase 5A CNN-Transformer (Epoch 4),124374169,2026-09-14T19:38:35.481247425,Verified on Disk
+checkpoints/phase5/archive_dcid35_cnn_only_interrupted_epoch5/best_model.pt,Archived Checkpoint,Interrupted Phase 5A CNN-only (Epoch 5),98621440,2026-09-15T19:53:08.722393751,Verified on Disk
+reports/exp_A_robustness/robustness_summary.json,Robustness Metric,Phase 2A Clean vs Noise Degradation,309,2026-09-13T20:23:29.057214260,Verified on Disk
+reports/exp_B_robustness/robustness_summary.json,Robustness Metric,Phase 2B Clean vs Noise Degradation,352,2026-09-13T22:16:25.309829235,Verified on Disk
+reports/phase3/near_duplicate_pairs.csv,Audit Data,Phase 3 Pairwise dHash Cross-Split Similarity Table,164787024,2026-09-14T02:35:59.781462431,Verified on Disk
+reports/phase3/linear_baseline_metrics.csv,Linear Probe Metric,Phase 3 Frozen Feature Logistic Regression Metrics,502,2026-09-14T03:04:43.538040400,Verified on Disk
+reports/phase4/dcid7_ablation/metrics.csv,Comparative Metrics,Phase 4 DCID-7 Three-Way Comparison,312,2026-09-14T15:56:10.550312757,Verified on Disk
+reports/phase4/generalization_stress_test/metrics.csv,Stress-Test Metrics,Phase 4D dHash Filtered Subsets Metrics,692,2026-09-14T16:42:37.115374327,Verified on Disk
+reports/phase4/dcid7_cnn_only/metrics.json,Metric Artifact,Phase 4 CNN-only Final Evaluation Metrics,716,2026-09-14T15:55:28.916437864,Verified on Disk
+reports/phase4/dcid7_server/metrics.json,Metric Artifact,Phase 4 CNN-Transformer Final Evaluation Metrics,745,2026-09-14T09:45:40.386639833,Verified on Disk
+reports/phase5/dcid35_cnn_only/metrics.json,Metric Artifact,Phase 5A CNN-only Final Evaluation Metrics,760,2026-09-16T08:58:43.281216621,Verified on Disk
+reports/phase5/dcid35_server/metrics.json,Metric Artifact,Phase 5A CNN-Transformer Final Evaluation Metrics,773,2026-09-15T19:15:56.363491535,Verified on Disk
+reports/phase5/phase5a_dcid35_comparison.md,Comparative Report,Phase 5A DCID-35 Summary Comparison Table,3350,2026-09-16T09:03:38.668433189,Verified on Disk
+reports/phase5/PHASE5A_RESULT_LOCK.md,Freeze Document,Phase 5A Metric Lock Declaration,2651,2026-09-16T09:03:40.683012724,Verified on Disk
+data/manifests/dcid_manifest.csv,Dataset Manifest,"Census of 97,999 Images with MD5 and Split Flags",19566031,2026-09-13T17:25:17.790806293,Verified on Disk
+configs/dcid7.yaml,Configuration,Original Phase 1 Experiment Config (7-class),7807,2026-09-13T17:17:20.775946617,Verified on Disk
+configs/dcid35.yaml,Configuration,Original Phase 1 Experiment Config (35-class),7171,2026-09-13T17:17:45.088854790,Verified on Disk
+configs/phase4_dcid7_server.yaml,Configuration,Phase 4 CNN-Transformer Config,1200,2026-09-14T03:46:55.333834410,Verified on Disk
+configs/phase4_dcid7_cnn_only.yaml,Configuration,Phase 4 CNN-only Config,1208,2026-09-14T10:43:43.385595798,Verified on Disk
+configs/phase5_dcid35_server.yaml,Configuration,Phase 5A CNN-Transformer Config,1176,2026-09-14T16:50:43.968849659,Verified on Disk
+configs/phase5_dcid35_cnn_only.yaml,Configuration,Phase 5A CNN-only Config,1166,2026-09-14T16:50:46.126782894,Verified on Disk
+src/models/server_fusion.py,Source Code,LithoScanServerFusion Architecture Definition,3970,2026-09-14T03:18:48.951850653,Verified on Disk
+src/models/train_baseline.py,Source Code,Phase 2 ResNet Baseline Training Script,20307,2026-09-13T18:05:10.694577932,Verified on Disk
+src/scripts/train_server.py,Source Code,Phase 4 & 5 Server Model Training Script,14332,2026-09-15T12:33:53.188609600,Verified on Disk
+src/data/dcid_dataset.py,Source Code,DCID PyTorch Dataset and Augmentation Factory,13140,2026-09-13T17:18:32.863819122,Verified on Disk
+src/data/split_utils.py,Source Code,Split Verification and Safety Assertions,8896,2026-09-13T17:19:23.490700960,Verified on Disk
+src/evaluation/artifact_intervention.py,Source Code,40px Border Occlusion Implementation,2536,2026-09-14T03:52:09.519340037,Verified on Disk
+src/scripts/evaluate_generalization.py,Source Code,Phase 4D Generalization Stress-Test Runner,9953,2026-09-14T16:14:06.569040537,Verified on Disk
+app.py,Application Code,Streamlit Interactive Dashboard,16279,2026-09-22T14:39:06.149022102,Verified on Disk

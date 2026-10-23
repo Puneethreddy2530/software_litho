@@ -1,0 +1,77 @@
+{
+  "pilot_name": "phase6_snn_pilot_dcid7",
+  "dataset": "DCID-7",
+  "model_architecture": "ConvSNN4",
+  "parameters": 390695,
+  "time_steps": 4,
+  "training_subset_fraction": 0.1,
+  "training_samples_used": 2520,
+  "validation_samples": 2800,
+  "epochs_completed": 3,
+  "total_training_wall_clock_sec": 0.0,
+  "best_val_macro_f1": 0.9474,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.6211,
+      "val_loss": 0.4586,
+      "val_acc": 0.8254,
+      "val_macro_f1": 0.8208,
+      "mean_firing_rate": 0.244,
+      "duration_sec": 96.7,
+      "peak_vram_mb": 2521.4,
+      "lr": 0.001
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.3282,
+      "val_loss": 0.165,
+      "val_acc": 0.9486,
+      "val_macro_f1": 0.9474,
+      "mean_firing_rate": 0.235,
+      "duration_sec": 88.5,
+      "peak_vram_mb": 2521.4,
+      "lr": 0.00075
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.2413,
+      "val_loss": 0.1399,
+      "val_acc": 0.9486,
+      "val_macro_f1": 0.9467,
+      "mean_firing_rate": 0.236,
+      "duration_sec": 89.4,
+      "peak_vram_mb": 2521.4,
+      "lr": 0.00025
+    }
+  ],
+  "latency_snn": {
+    "gpu": {
+      "median_ms": 9.539455890655518,
+      "p95_ms": 10.337430572509765,
+      "mean_ms": 9.493006076812744,
+      "std_ms": 0.5032158451471265
+    },
+    "cpu": {
+      "median_ms": 45.28549997485243,
+      "p95_ms": 46.98826498934068,
+      "mean_ms": 45.58767333510332,
+      "std_ms": 0.9939288276748487
+    }
+  },
+  "latency_ann_matched": {
+    "gpu": {
+      "median_ms": 0.9175040125846863,
+      "p95_ms": 1.6749184489250182,
+      "mean_ms": 1.021294396519661,
+      "std_ms": 0.25886443186879654
+    },
+    "cpu": {
+      "median_ms": 9.24735001171939,
+      "p95_ms": 9.526815003482625,
+      "mean_ms": 9.232806658837944,
+      "std_ms": 0.23968018246697204
+    }
+  },
+  "learned_successfully": true
+}

@@ -1,0 +1,5 @@
+Benchmark,Architecture,Total Clean Eval Images,Excluded Near-Duplicates (dHash $\le 2$),Retained Pristine Images,Original Full Eval Accuracy (%),Deduplicated Subset Accuracy (%),Accuracy Shift (\Delta Acc),Original ECE (%),Deduplicated ECE (%)
+DCID-35,ResNet-50,"5,250",50,5200 (99.0%),99.73%,99.73%,-0.00%,0.12%,0.12%
+DCID-35,CNN-Only,"5,250",50,5200 (99.0%),99.81%,99.81%,-0.00%,0.08%,0.08%
+DCID-7,ResNet-50,"5,250",82,5168 (98.4%),100.00%,100.00%,+0.00%,0.05%,0.05%
+DCID-7,CNN-Only,"5,250",82,5168 (98.4%),99.96%,99.96%,-0.00%,0.03%,0.04%

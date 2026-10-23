@@ -1,0 +1,1 @@
+GPU: NVIDIA GeForce RTX 3050 6GB Laptop GPU\nVRAM: 6.00 GB\nCUDA: 12.4\nPyTorch: 2.6.0+cu124\nCUDA Available: True

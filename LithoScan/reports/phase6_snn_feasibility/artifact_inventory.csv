@@ -1,0 +1,16 @@
+ArtifactPath,Type,Description,Status,VerificationMethod
+reports/phase6_snn_feasibility/00_audit2_corrections.md,Scientific Report,Corrections of prior audit weaknesses on perceptual similarity clean/noisy correspondence cost ratios and conformal guarantees,COMPLETE,Independent audit and script verification
+reports/phase6_snn_feasibility/01_snn_literature_gap.md,Scientific Report,Systematic SNN literature survey covering 11 primary studies and ranking research directions,COMPLETE,Scholarly search and citation verification
+reports/phase6_snn_feasibility/02_preregistered_experiment_protocol.md,Scientific Protocol,Preregistered falsifiable hypothesis matched architecture pairs and success/failure conditions,COMPLETE,Formal methodology review
+reports/phase6_snn_feasibility/03_data_and_split_feasibility.md,Scientific Report,Audit of DCID and GSSA HyLogger dataset partitions and provenance limits,COMPLETE,Directory and metadata inspection
+reports/phase6_snn_feasibility/04_metric_and_resource_protocol.md,Scientific Protocol,Standards for classification metrics single-sample latency profiling and SOP energy claims,COMPLETE,Literature standard alignment
+reports/phase6_snn_feasibility/05_pilot_results.md,Experimental Report,Empirical results of bounded pilot on DCID-7 (10% subset 3 epochs) with latency profiling,COMPLETE,Execution and log validation
+reports/phase6_snn_feasibility/06_go_no_go_recommendation.md,Decision Report,Answers to 10 scientific questions and formal CONDITIONAL GO recommendation,COMPLETE,Multi-criteria evaluation
+reports/phase6_snn_feasibility/pilot_summary.json,Data Artifact,JSON summary of pilot metrics epoch loss firing rates and measured latency,COMPLETE,Automatic script output
+configs/phase6_snn_pilot.yaml,Configuration,Bounded pilot configuration for DCID-7 training,COMPLETE,YAML parsing and execution
+src/models/phase6_snn.py,Source Code,PyTorch Leaky Integrate-and-Fire SNN with surrogate gradients and matched ConvANN4 baseline,COMPLETE,Unit tests (7/7 passed)
+src/scripts/train_snn_pilot.py,Source Code,Bounded SNN training script with resumable checkpointing and single-sample latency profiling,COMPLETE,Pilot execution (3 epochs)
+tests/test_phase6_snn.py,Test Suite,Unit tests covering surrogate gradients LIF neuron dynamics ConvSNN4 forward/backward and parity,COMPLETE,pytest execution
+checkpoints/phase6_snn_pilot/best_model.pt,Checkpoint,Best validation model checkpoint from Phase 6 SNN pilot (Val Macro-F1: 0.9474),COMPLETE,torch.load verification
+checkpoints/phase6_snn_pilot/last_checkpoint.pt,Checkpoint,Complete resumable training state containing optimizer scheduler scaler and RNG states,COMPLETE,torch.load verification
+reports/phase6_snn_feasibility/artifact_inventory.csv,Inventory,Complete inventory of all Phase 6 assets created and verified,COMPLETE,Direct filesystem audit

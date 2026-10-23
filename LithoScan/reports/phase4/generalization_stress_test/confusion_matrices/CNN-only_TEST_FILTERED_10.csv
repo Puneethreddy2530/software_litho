@@ -1,0 +1,8 @@
+,1.Red sandstone,2.Light sandstone,3.Gray siltstone,4.Mudstone,5.Granite,6.Basalt,7.Marble
+1.Red sandstone,698,0,0,0,0,0,0
+2.Light sandstone,0,615,0,0,0,1,1
+3.Gray siltstone,0,0,393,0,0,0,0
+4.Mudstone,0,0,0,820,0,0,0
+5.Granite,0,0,0,0,932,0,0
+6.Basalt,0,0,0,0,0,115,0
+7.Marble,0,0,0,0,0,0,580

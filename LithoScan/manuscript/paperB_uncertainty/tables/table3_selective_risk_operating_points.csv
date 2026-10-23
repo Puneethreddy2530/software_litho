@@ -1,0 +1,13 @@
+Benchmark,Architecture,Nominal Error Target,Pipeline A (Clean-Cal) Threshold,Pipeline A Realized Cov (%),Pipeline A Referral Rate (%),Pipeline A Realized Error (%),Pipeline B (Def-Cal) Threshold,Pipeline B Realized Cov (%),Pipeline B Referral Rate (%),Pipeline B Realized Error (%)
+DCID-35,ResNet-50,1%,0.5389,97.2%,2.8%,9.63%,0.9998,48.1%,51.9%,1.56%
+DCID-35,ResNet-50,5%,0.5389,97.2%,2.8%,9.63%,0.9295,84.6%,15.4%,4.52%
+DCID-35,ResNet-50,10%,0.5389,97.2%,2.8%,9.63%,0.5289,97.4%,2.6%,9.79%
+DCID-35,CNN-Only,1%,0.5747,97.4%,2.6%,11.04%,1.0000,48.2%,51.8%,1.19%
+DCID-35,CNN-Only,5%,0.5747,97.4%,2.6%,11.04%,0.9553,84.2%,15.8%,5.81%
+DCID-35,CNN-Only,10%,0.5747,97.4%,2.6%,11.04%,0.6741,95.3%,4.7%,9.85%
+DCID-7,ResNet-50,1%,0.8782,94.0%,6.0%,1.25%,0.9141,93.0%,7.0%,1.11%
+DCID-7,ResNet-50,5%,0.8782,94.0%,6.0%,1.25%,0.3784,100.0%,0.0%,3.22%
+DCID-7,ResNet-50,10%,0.8782,94.0%,6.0%,1.25%,0.3784,100.0%,0.0%,3.22%
+DCID-7,CNN-Only,1%,0.5818,99.1%,0.9%,3.57%,0.9986,82.9%,17.1%,1.08%
+DCID-7,CNN-Only,5%,0.5818,99.1%,0.9%,3.57%,0.3771,100.0%,0.0%,4.00%
+DCID-7,CNN-Only,10%,0.5818,99.1%,0.9%,3.57%,0.3771,100.0%,0.0%,4.00%

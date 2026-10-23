@@ -1,0 +1,54 @@
+# Phase 6 v1.1 SNN Pilot Configuration
+# Strictly bounded feasibility study on DCID-7 with deterministic class-stratified split
+
+experiment:
+  name: "phase6_snn_pilot_dcid7_v1_1"
+  phase: "phase6_v1_1"
+  version: "1.1"
+  description: "Bounded SNN feasibility pilot with verified stratified split and exact activity tracking"
+  seed: 42
+
+data:
+  dataset_root: "C:/Users/punee/Desktop/Software_lithology/DCID/DCID/DCID-512-7"
+  split_manifest: "configs/phase6_split_manifest_dcid7_v1_1.json"
+  image_size: 224
+  interpolation: "bicubic"  # Explicit bicubic interpolation
+  num_classes: 7
+  train_per_class: 360      # Exactly 360 per class (2,520 total bounded pilot)
+  val_per_class: 400        # Exactly 400 per class (2,800 total validation)
+  batch_size: 16            # Bounded memory footprint
+  num_workers: 2
+
+augmentation:
+  # Geological Augmentation Justification:
+  # - Horizontal flip (p=0.5): Valid because drill cores can be viewed from either side of the tray channel.
+  # - Vertical flip (p=0.5): Preserves lithological texture symmetry along the core barrel axis.
+  # - Mild rotation (+/- 10 deg): Simulates minor misalignments in the mechanical core-tray cradle.
+  # - Color jitter: Lightness/contrast variation (+/- 10%) simulating variable rig-site LED illumination.
+  horizontal_flip_prob: 0.5
+  vertical_flip_prob: 0.5
+  rotation_degrees: 10.0
+  brightness_jitter: 0.1
+  contrast_jitter: 0.1
+
+model:
+  architecture: "ConvSNN4"
+  parameters: 390695
+  time_steps: 4
+  tau: 2.0
+  v_threshold: 1.0
+  surrogate: "fast_sigmoid"
+  surrogate_k: 25.0
+  dropout: 0.2
+
+training:
+  epochs: 3                 # Strictly bounded pilot: maximum 3 epochs
+  lr: 0.001
+  weight_decay: 0.0001
+  amp: true                 # Mixed precision training
+  eval_on_official_test: false  # SAFETY RULE: NEVER evaluate on official test
+
+checkpoint:
+  checkpoint_dir: "checkpoints/phase6_snn_pilot_v1_1"
+  save_last: true
+  save_best: true

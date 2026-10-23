@@ -1,0 +1,80 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+venv*/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+venv_cuda/
+
+# Pytest / Cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE & OS
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+*.tmp
+
+# Large raw datasets (must be downloaded separately via download_dataset.py)
+DCID/
+DCID.zip
+data/raw/
+LithoScan/data/raw/
+
+# Interrupted / archive checkpoints (to stay within Git LFS quota)
+checkpoints/**/archive_*
+LithoScan/checkpoints/**/archive_*
+checkpoints/**/final_model.pt
+LithoScan/checkpoints/**/final_model.pt
+checkpoints/**/tampered_checkpoint.pt
+LithoScan/checkpoints/**/tampered_checkpoint.pt
+
+# Large uncompressed audit CSV (use near_duplicate_pairs.csv.gz instead)
+reports/phase3/near_duplicate_pairs.csv
+LithoScan/reports/phase3/near_duplicate_pairs.csv
+!reports/phase3/near_duplicate_pairs.csv.gz
+!LithoScan/reports/phase3/near_duplicate_pairs.csv.gz
+
+# Scratch folders
+scratch/
+LithoScan/scratch/
+scratch_*/

@@ -1,0 +1,177 @@
+# =============================================================================
+# LithoScan — DCID-7 Experiment Configuration
+# =============================================================================
+# Covers:
+#   Experiment A  — DCID-7 baseline classifier
+#   Experiment C  — clean vs noisy/defective robustness (7-class variant)
+#   Experiment D  — artifact-bias mitigation (7-class variant)
+#   Experiment E  — Server Edition vs Field Edition (7-class)
+#   Experiment F  — centralized vs federated training (7-class)
+#   Experiment G  — FedAvg vs Byzantine-robust aggregation
+#   Experiment H  — conformal prediction calibration
+#
+# NOTE: No training has been run yet. These are template configurations.
+#       All model components are marked TODO and will be populated once
+#       architecture decisions are finalised.
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# Dataset
+# ---------------------------------------------------------------------------
+dataset:
+  version: "DCID-512-7"          # one of: DCID-512-7 | DCID-512-35 | noise-512-7 | noise-512-35
+  num_classes: 7
+  # Path to the extracted DCID archive root (override with env var DCID_ROOT)
+  dcid_root: "C:/Users/punee/Desktop/Software_lithology/DCID/DCID"
+  # Noise/defective variant used in robustness experiments
+  noise_version: "noise-512-7"
+  # Official splits — DO NOT change to "random" or add custom splits
+  train_split: "train"
+  test_split:  "test"
+
+# ---------------------------------------------------------------------------
+# Preprocessing & augmentation
+# ---------------------------------------------------------------------------
+preprocessing:
+  image_size: 512              # resize to this square (512 = native resolution)
+  normalize_mean: [0.485, 0.456, 0.406]
+  normalize_std:  [0.229, 0.224, 0.225]
+
+augmentation:
+  enabled: true
+  horizontal_flip: true
+  vertical_flip:   true
+  rotation_degrees: 15
+  color_jitter:
+    brightness: 0.2
+    contrast:   0.2
+    saturation: 0.1
+    hue:        0.05
+
+# ---------------------------------------------------------------------------
+# DataLoader
+# ---------------------------------------------------------------------------
+dataloader:
+  batch_size: 32
+  num_workers: 4
+  pin_memory: true
+  seed: 42                     # reproducibility seed (fixed — do not change per run)
+  persistent_workers: true
+
+# ---------------------------------------------------------------------------
+# Experiment A — Baseline Classifier (centralized, clean data)
+# ---------------------------------------------------------------------------
+experiment_A:
+  name: "DCID7_baseline"
+  description: "Centralized training on clean DCID-7 images."
+  dataset_version: "DCID-512-7"
+  # TODO: fill in once model architecture is chosen
+  model:
+    architecture: "TODO"       # e.g. resnet50 | vit_b_16 | cnn_transformer_fusion
+    pretrained: true
+    freeze_backbone: false
+  training:
+    epochs: 50                 # placeholder — tune after first successful run
+    optimizer: "AdamW"
+    learning_rate: 1.0e-4
+    weight_decay: 1.0e-4
+    lr_scheduler: "CosineAnnealingLR"
+    early_stopping_patience: 10
+  output:
+    checkpoint_dir: "checkpoints/exp_A"
+    log_dir: "reports/exp_A"
+
+# ---------------------------------------------------------------------------
+# Experiment C — Robustness: clean vs noisy/defective
+# ---------------------------------------------------------------------------
+# Experiment C uses only the four official DCID dataset variants as-is.
+# No synthetic noise injection or RWDA is performed — the noise-* directories
+# already contain real-world defective samples curated by the dataset authors.
+experiment_C:
+  name: "DCID7_robustness"
+  description: |
+    Robustness evaluation using the official dataset variants.
+    Two evaluation conditions:
+      1. clean train  → clean test  (DCID-512-7 train → DCID-512-7 test)
+      2. clean train  → noise test  (DCID-512-7 train → noise-512-7 test)
+    The model is trained only on clean data; no noise is injected into training.
+  train_dataset: "DCID-512-7"
+  eval_conditions:
+    - name: "clean_to_clean"
+      eval_dataset: "DCID-512-7"
+    - name: "clean_to_noise"
+      eval_dataset: "noise-512-7"
+  # TODO: reuse model block from experiment_A
+
+# ---------------------------------------------------------------------------
+# Experiment D — Artifact-Bias Mitigation
+# ---------------------------------------------------------------------------
+experiment_D:
+  name: "DCID7_artifact_bias"
+  description: "Train with artifact-bias mitigation (cracks, mud, scale-bars)."
+  artifact_types: ["crack", "mud", "scale_bar"]
+  mitigation_strategy: "TODO"  # e.g. masking | reweighting | adversarial debiasing
+
+# ---------------------------------------------------------------------------
+# Experiment E — Server Edition vs Field Edition
+# ---------------------------------------------------------------------------
+experiment_E:
+  name: "DCID7_server_vs_field"
+  description: "Compare CNN+Transformer fusion (Server) vs SNN (Field)."
+  server_edition:
+    model_type: "cnn_transformer_fusion"
+    # TODO: specify backbone + fusion head
+  field_edition:
+    model_type: "spiking_neural_network"
+    # TODO: specify SNN architecture and time-steps
+
+# ---------------------------------------------------------------------------
+# Experiment F — Centralized vs Federated Training
+# ---------------------------------------------------------------------------
+experiment_F:
+  name: "DCID7_centralized_vs_federated"
+  description: "Simulate federated learning across 3 sites."
+  sites: ["site_A", "site_B", "site_C"]
+  data_distribution: "iid"    # iid | non_iid
+  federated_rounds: 20
+  local_epochs: 3
+  aggregation: "FedAvg"
+
+# ---------------------------------------------------------------------------
+# Experiment G — FedAvg vs Byzantine-Robust Aggregation
+# ---------------------------------------------------------------------------
+experiment_G:
+  name: "DCID7_byzantine_robust"
+  description: "Compare FedAvg vs Krum/Trimmed-Mean under simulated Byzantine attackers."
+  aggregation_methods: ["FedAvg", "Krum", "TrimmedMean", "Bulyan"]
+  byzantine_fraction: 0.2     # fraction of clients assumed to be malicious
+  attack_types: ["label_flip", "gradient_noise"]
+
+# ---------------------------------------------------------------------------
+# Experiment H — Conformal Prediction Calibration
+# ---------------------------------------------------------------------------
+experiment_H:
+  name: "DCID7_conformal"
+  description: |
+    Calibrate conformal prediction sets on held-out calibration data.
+    The prediction-set threshold (q_hat) is computed from the calibration
+    set at the desired alpha level — it is NOT a manually chosen constant.
+  calibration_data: "data/calibration/"
+  alpha: 0.1                  # target marginal error rate → 90% coverage guarantee
+  nonconformity_score: "softmax_margin"   # or "softmax_aps"
+  # NOTE: triage_threshold is intentionally absent.
+  # The threshold q_hat is derived from the calibration set via the
+  # conformal quantile formula: q_hat = quantile(scores, ceil((n+1)*(1-alpha))/n)
+  # Do not hard-code this value — it depends on the calibration distribution.
+
+# ---------------------------------------------------------------------------
+# Paths (relative to project root)
+# ---------------------------------------------------------------------------
+paths:
+  manifest:   "data/manifests/dcid_manifest.csv"
+  reports:    "reports/"
+  figures:    "reports/figures/"
+  checkpoints: "checkpoints/"
+  calibration: "data/calibration/"
+  site_data:   "data/site_data/"
+  final_test:  "data/final_test/"

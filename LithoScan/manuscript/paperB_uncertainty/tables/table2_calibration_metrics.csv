@@ -1,0 +1,17 @@
+Benchmark,Architecture,Cohort & Strategy,Accuracy (%) [95% CI],ECE (%) [95% CI],NLL [95% CI],Brier Score
+DCID-35,ResNet-50,Clean (Uncalibrated),"99.73 [99.60, 99.87]","0.12 [0.07, 0.25]","0.0065 [0.0036, 0.0096]",0.0037
+DCID-35,ResNet-50,Defective (Uncalibrated),"88.64 [87.46, 89.75]","6.66 [5.74, 7.69]","0.5161 [0.4540, 0.5806]",0.1794
+DCID-35,ResNet-50,"Defective ($T_{\text{clean}}$ Scaled, Shifted)","88.64 [87.46, 89.75]","5.04 [4.20, 6.09]","0.4410 [0.3919, 0.4922]",0.1725
+DCID-35,ResNet-50,"Defective ($T_{\text{def}}$ Scaled, Matched)","88.64 [87.46, 89.75]","2.12 [1.84, 3.45]","0.4052 [0.3659, 0.4462]",0.1688
+DCID-35,CNN-Only,Clean (Uncalibrated),"99.81 [99.70, 99.92]","0.08 [0.09, 0.23]","0.0054 [0.0032, 0.0077]",0.0031
+DCID-35,CNN-Only,Defective (Uncalibrated),"87.50 [86.25, 88.61]","8.53 [7.65, 9.74]","0.7558 [0.6724, 0.8499]",0.2091
+DCID-35,CNN-Only,"Defective ($T_{\text{clean}}$ Scaled, Shifted)","87.50 [86.25, 88.61]","5.93 [5.06, 7.05]","0.5561 [0.4991, 0.6199]",0.1967
+DCID-35,CNN-Only,"Defective ($T_{\text{def}}$ Scaled, Matched)","87.50 [86.25, 88.61]","3.09 [2.55, 4.34]","0.4850 [0.4399, 0.5344]",0.1903
+DCID-7,ResNet-50,Clean (Uncalibrated),"100.00 [100.00, 100.00]","0.05 [0.03, 0.08]","0.0006 [0.0003, 0.0009]",0.0001
+DCID-7,ResNet-50,Defective (Uncalibrated),"96.79 [96.11, 97.43]","1.38 [0.98, 2.03]","0.1134 [0.0887, 0.1400]",0.0510
+DCID-7,ResNet-50,"Defective ($T_{\text{clean}}$ Scaled, Shifted)","96.79 [96.11, 97.43]","1.01 [0.79, 1.67]","0.1049 [0.0877, 0.1235]",0.0505
+DCID-7,ResNet-50,"Defective ($T_{\text{def}}$ Scaled, Matched)","96.79 [96.11, 97.43]","0.76 [0.64, 1.48]","0.1046 [0.0870, 0.1237]",0.0504
+DCID-7,CNN-Only,Clean (Uncalibrated),"99.96 [99.90, 100.00]","0.03 [0.01, 0.09]","0.0022 [0.0001, 0.0057]",0.0008
+DCID-7,CNN-Only,Defective (Uncalibrated),"96.00 [95.29, 96.71]","2.56 [2.11, 3.32]","0.2056 [0.1587, 0.2522]",0.0666
+DCID-7,CNN-Only,"Defective ($T_{\text{clean}}$ Scaled, Shifted)","96.00 [95.29, 96.71]","1.62 [1.37, 2.47]","0.1556 [0.1235, 0.1869]",0.0648
+DCID-7,CNN-Only,"Defective ($T_{\text{def}}$ Scaled, Matched)","96.00 [95.29, 96.71]","1.73 [1.27, 2.44]","0.1426 [0.1161, 0.1685]",0.0646

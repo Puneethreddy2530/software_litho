@@ -1,0 +1,5 @@
+Subset,Total_Images,Retained_Pct,Excluded_Count,Min_Class_Count,Max_Class_Count,Any_Class_Disappears
+TEST_ALL,7000,100.00%,0,1000,1000,False
+TEST_FILTERED_2,6892,98.46%,108,947,1000,False
+TEST_FILTERED_5,6297,89.96%,703,689,999,False
+TEST_FILTERED_10,4155,59.36%,2845,115,932,False

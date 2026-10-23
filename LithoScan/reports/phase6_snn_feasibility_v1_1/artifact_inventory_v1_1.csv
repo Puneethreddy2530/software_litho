@@ -1,0 +1,20 @@
+ArtifactPath,Type,Description,Status,VerificationMethod
+reports/phase6_snn_feasibility_v1_1/01_pilot_provenance_reconciliation.md,Forensic Report,Audit of task-376 logs checkpoint payloads and reconciliation of pilot provenance,COMPLETE,Direct file inspection
+reports/phase6_snn_feasibility_v1_1/02_code_corrections.md,Technical Report,Detailed documentation of software repairs activity tracking and latency standardization,COMPLETE,Code and test verification
+reports/phase6_snn_feasibility_v1_1/03_protocol_amendment.md,Protocol Amendment,Formal amendment reconciling parameters batch size geological augmentations and testing,COMPLETE,Preregistration audit
+reports/phase6_snn_feasibility_v1_1/04_test_results.md,Testing Report,Pass/fail status of all 66 tests across the test suite (100% pass validated post-clarification in 25.45s),COMPLETE,pytest execution (66/66)
+reports/phase6_snn_feasibility_v1_1/05_full_campaign_readiness.md,Decision Gate,Formal PASS readiness verdict with resolved issues and boundaries,COMPLETE,Comprehensive audit
+reports/phase6_snn_feasibility_v1_1/06_smoke_test_results.md,Engineering Report,End-to-end smoke test engineering results documenting benchmark provenance energy proxy assumptions and latencies,COMPLETE,Runtime execution
+reports/phase6_snn_feasibility_v1_1/07_manifest_integrity.md,Audit Report,Manifest integrity audit documenting canonical payload vs normalized text hashes sample counts and test isolation,COMPLETE,Cryptographic and disk audit
+reports/phase6_snn_feasibility_v1_1/08_resume_integrity.md,Audit Report,Checkpoint resumption audit verifying two-epoch interruption continuity cumulative time and tamper detection,COMPLETE,Runtime simulation
+reports/phase6_snn_feasibility_v1_1/09_protocol_final_check.md,Protocol Audit,Pre-experiment reconciliation of cohort definitions degradation formulas hypotheses and test isolation,COMPLETE,Formal methodology review
+reports/phase6_snn_feasibility_v1_1/10_final_execution_gate.md,Execution Certification,Final execution gate certification classifying all 18 checks as PASS with clarified energy and hash semantics,COMPLETE,Multi-criteria gate review
+reports/phase6_snn_feasibility_v1_1/smoke_test_summary.json,Data Artifact,Complete JSON diagnostic summary of smoke test execution and standardized latencies,COMPLETE,Script generation
+src/data/stratified_split.py,Source Code,Deterministic class-stratified split generator for DCID-7,COMPLETE,Split integrity test
+configs/phase6_split_manifest_dcid7_v1_1.json,Data Artifact,Stratified split manifest with exact per-class sample mappings and SHA-256 hash,COMPLETE,JSON validation & SHA-256
+src/models/phase6_snn_v1_1.py,Source Code,Repaired SNN and matched ANN architectures with dataset-wide SpikeActivityTracker,COMPLETE,Unit tests (6/6 passed)
+src/scripts/train_snn_pilot_v1_1.py,Source Code,Resilient pilot runner with zero hardcoded metric fallbacks and standardized latency profiling,COMPLETE,Syntax and test verification
+src/scripts/run_phase6_smoke_test.py,Source Code,End-to-end smoke test harness verifying fresh training epochs resumption and latency,COMPLETE,Execution verification
+configs/phase6_snn_pilot_v1_1.yaml,Configuration,Versioned pilot configuration referencing stratified split and bicubic interpolation,COMPLETE,YAML parsing verification
+tests/test_phase6_snn_v1_1.py,Test Suite,Unit and integrity tests covering activity tracking resume scenarios and parity,COMPLETE,pytest execution
+reports/phase6_snn_feasibility_v1_1/artifact_inventory_v1_1.csv,Inventory,Complete inventory of all Phase 6 v1.1 assets,COMPLETE,Direct filesystem audit

@@ -1,0 +1,11 @@
+batch_size: 8
+dataset: DCID-512-7
+effective_batch_size: 32
+epochs: 30
+gradient_accumulation: 4
+lr: 0.0001
+model: resnet50
+optimizer: AdamW
+pretrained: true
+seed: 42
+weight_decay: 0.0001

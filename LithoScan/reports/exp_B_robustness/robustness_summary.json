@@ -1,0 +1,10 @@
+{
+    "clean_accuracy": 0.9968571428571429,
+    "clean_macro_f1": 0.9968588492354721,
+    "clean_weighted_f1": 0.9968588492354717,
+    "noise_accuracy": 0.8864285714285715,
+    "noise_macro_f1": 0.8921667077705864,
+    "noise_weighted_f1": 0.8921667077705864,
+    "accuracy_drop": 0.11042857142857143,
+    "macro_f1_drop": 0.1046921414648857
+}

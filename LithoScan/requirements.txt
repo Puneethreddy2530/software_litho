@@ -1,0 +1,35 @@
+# LithoScan — Python dependencies
+# Python 3.11+ required
+
+# Deep learning
+torch>=2.2.0
+torchvision>=0.17.0
+
+# Data handling
+pandas>=2.1.0
+numpy>=1.26.0
+
+# ML utilities
+scikit-learn>=1.4.0
+
+# Visualisation
+matplotlib>=3.8.0
+seaborn>=0.13.0
+
+# Image processing
+Pillow>=10.2.0
+
+# Utilities
+tqdm>=4.66.0
+PyYAML>=6.0.1
+
+# Testing
+pytest>=8.0.0
+
+# OpenCV for Grad-CAM
+opencv-python>=4.8.0
+
+# Interactive Dashboard
+streamlit>=1.30.0
+plotly>=5.18.0
+

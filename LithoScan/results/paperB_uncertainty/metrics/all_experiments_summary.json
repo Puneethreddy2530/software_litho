@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-10-22T20:55:00Z",
+  "device": "cuda:0",
+  "benchmarks_completed": [
+    "dcid35_resnet50",
+    "dcid35_cnn_only",
+    "dcid7_resnet50",
+    "dcid7_cnn_only"
+  ],
+  "total_runtime_seconds": 809.4908545017242
+}

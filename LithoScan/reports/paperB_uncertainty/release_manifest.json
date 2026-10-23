@@ -1,0 +1,403 @@
+{
+  "title": "When Should a Lithology Classifier Abstain? Calibration, Selective Risk, and Human Referral Under Defective Drill-Core Imaging",
+  "research_track": "LithoScan Paper B",
+  "target_venue": "Computers & Geosciences (Elsevier)",
+  "submission_decision": "GO FOR SUBMISSION",
+  "manifest_generated_utc": "2026-10-22T15:45:42.825464Z",
+  "protocol_sha256": "897d1a76a7dcfe88e134e7f4c23422c3b42c219b08389d0e9dc94aad1b976b57",
+  "key_results": {
+    "dcid35_resnet50_clean_accuracy_pct": 99.73,
+    "dcid35_resnet50_defective_accuracy_pct": 88.64,
+    "uncalibrated_ece_clean_pct": 0.12,
+    "uncalibrated_ece_defective_pct": 6.66,
+    "clean_calibrated_tau_5pct": 0.5389,
+    "realized_error_clean_calibrated_defective_pct": 9.63,
+    "domain_matched_tau_5pct": 0.9295,
+    "realized_error_domain_matched_defective_pct": 4.52,
+    "automated_coverage_domain_matched_pct": 84.6,
+    "geologist_referral_rate_pct": 15.4,
+    "conformal_coverage_clean_cal_defective_pct": 57.68,
+    "conformal_coverage_domain_matched_pct": 95.57,
+    "wilcoxon_p_value": "2.54e-198",
+    "mean_conformal_set_size_domain_matched": 1.4,
+    "persistent_errors_audited": 217
+  },
+  "artifact_counts": {
+    "total": 53,
+    "present": 53,
+    "missing": 0
+  },
+  "files": [
+    {
+      "path": "configs/paperB_uncertainty/experiment_config.yaml",
+      "type": "configuration",
+      "sha256": "4ed52a320df02c5aa8d296c02c7702118c68757dce30849d6f05e1ac331795ef",
+      "size_bytes": 2177,
+      "status": "PRESENT"
+    },
+    {
+      "path": "configs/paperB_uncertainty/paperB_split_manifest_dcid35.json",
+      "type": "locked_manifest",
+      "sha256": "83dcf1a4aef815c296f4cbb79922cece9bdb30828bc13844e0e9440af2a8c6a9",
+      "size_bytes": 1575880,
+      "status": "PRESENT"
+    },
+    {
+      "path": "configs/paperB_uncertainty/paperB_split_manifest_dcid7.json",
+      "type": "locked_manifest",
+      "sha256": "c387ed4d3a904eaa4977092dbf07fd4885cd5c1f59aee27ee11d17b80eb1b4c2",
+      "size_bytes": 1407888,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src/scripts/build_paperB_splits.py",
+      "type": "script",
+      "sha256": "49fc1dc2430aa10bda823cb670cbf7137bbadbd75dbbd5e198b5756f1913baf5",
+      "size_bytes": 6740,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src/scripts/run_paperB_experiments.py",
+      "type": "script",
+      "sha256": "b0304fc8b725ef41db6fe4561454ada8aa8a608241242f69a4e16e77bf65ab0c",
+      "size_bytes": 27786,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src/scripts/generate_paperB_figures.py",
+      "type": "script",
+      "sha256": "403e93baf050902d226c0a914ddfc7471825bedb9934401f5bf7c783c6fa09e3",
+      "size_bytes": 18668,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src/scripts/generate_paperB_tables.py",
+      "type": "script",
+      "sha256": "6652074cd7240cf2a6f5b188d81da32634395995711daf4959af2062b6bdef52",
+      "size_bytes": 12682,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src/scripts/generate_paperB_manifest.py",
+      "type": "script",
+      "sha256": "7c1b472836b61b2db64e1afa5d963b1228c6319ed46dbbea839d50e71032b5fc",
+      "size_bytes": 2493,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src/calibration/paperB_methods.py",
+      "type": "script",
+      "sha256": "69ca94eeb385f2b9d3ef59f5885a59a1f626f5c0fe13ded447d2b9186dfd46ad",
+      "size_bytes": 17458,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid35_resnet50_cal_clean.npz",
+      "type": "logits",
+      "sha256": "55103d7e4903c36963329abfa1298f40763cc5a76eefb615db746afc06772027",
+      "size_bytes": 364929,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid35_resnet50_cal_def.npz",
+      "type": "logits",
+      "sha256": "86628b2eab046c04778255404d8ea7ba4e22c63c007c462ff3fc251434a0aa01",
+      "size_bytes": 748537,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid35_resnet50_eval_clean.npz",
+      "type": "logits",
+      "sha256": "98b97e0fb26c0dac98039ee8af4a68543127e05c15651cc1fb1999a7832767e7",
+      "size_bytes": 1075329,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid35_resnet50_eval_def.npz",
+      "type": "logits",
+      "sha256": "bc4ac373a496c62f4e72447075bfdf931d1a85ea9c8b9ebaf5c97325d99ed27e",
+      "size_bytes": 598483,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid35_cnn_only_cal_clean.npz",
+      "type": "logits",
+      "sha256": "4b2cabfe4efa70792068036e4f1166d394355a272a5d93ac4b7143727b33c815",
+      "size_bytes": 385126,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid35_cnn_only_cal_def.npz",
+      "type": "logits",
+      "sha256": "d928400b618832ffb34b55d7c93081edf8721124979e4322472eb628f92692cb",
+      "size_bytes": 782979,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid35_cnn_only_eval_clean.npz",
+      "type": "logits",
+      "sha256": "7e604ad4a385294fc95a2fb011282ff5ebeb5f987940d308f4509b6d6ac50788",
+      "size_bytes": 1137249,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid35_cnn_only_eval_def.npz",
+      "type": "logits",
+      "sha256": "82f8c1aacac44e13985a122bedb6e2fbe9abef188797601be88926f95b81e6fe",
+      "size_bytes": 625378,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid7_resnet50_cal_clean.npz",
+      "type": "logits",
+      "sha256": "1f681a5685cd990bec753abc92e800fac7a40303c6dfd21ebfaf5e255afbe439",
+      "size_bytes": 79005,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid7_resnet50_cal_def.npz",
+      "type": "logits",
+      "sha256": "141c431c1a21fd719dd85a6e2a593d810588e37ee379e422b699c31f50d49ab2",
+      "size_bytes": 130151,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid7_resnet50_eval_clean.npz",
+      "type": "logits",
+      "sha256": "09d7e8080418bfe7fdff227da424c179cd182be10b482ad63cd491f5bed31383",
+      "size_bytes": 227842,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid7_resnet50_eval_def.npz",
+      "type": "logits",
+      "sha256": "10ae68fcaf9f0022669670a7d742ab8394429eda91a0e70e8173a9fedab86140",
+      "size_bytes": 128261,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid7_cnn_only_cal_clean.npz",
+      "type": "logits",
+      "sha256": "dc13e8ca6b529acd298de57586837290885e8a28502d690384e2a996d8087722",
+      "size_bytes": 79706,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid7_cnn_only_cal_def.npz",
+      "type": "logits",
+      "sha256": "eb7cfdd16a20538ce0b57939d42116e60b5db3f1b6aa4f4a2f0cc29cb5322f98",
+      "size_bytes": 131938,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid7_cnn_only_eval_clean.npz",
+      "type": "logits",
+      "sha256": "47e02fd6e3820569a59db47d81932814ffef6928d99ff9e9f33dee1e31c59cee",
+      "size_bytes": 230627,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/logits/dcid7_cnn_only_eval_def.npz",
+      "type": "logits",
+      "sha256": "4a8813c35ad795ac092401b63d3bc1ba9415c38027d6cc1a0ed3fb2e7c043506",
+      "size_bytes": 130173,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/metrics/dcid35_resnet50_full_results.json",
+      "type": "metrics",
+      "sha256": "42168ab56952dd1616ffc94ba57f7531342d193abd652aaf2e95977223a13ce3",
+      "size_bytes": 312604,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/metrics/dcid35_cnn_only_full_results.json",
+      "type": "metrics",
+      "sha256": "f644fbe80d52798a1ba100b4e854bd8ffdf363f99f35a98a3ec7f5cd18bb0d94",
+      "size_bytes": 281688,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/metrics/dcid7_resnet50_full_results.json",
+      "type": "metrics",
+      "sha256": "354dfb57d151f55e882124d4f06868fbbd7aea4950afdaecd3009d83156c534e",
+      "size_bytes": 279314,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/metrics/dcid7_cnn_only_full_results.json",
+      "type": "metrics",
+      "sha256": "6c722ff46ad2a209d9858a11a0ce82fbc579e8dc9c74f85183fb68b11447285c",
+      "size_bytes": 222562,
+      "status": "PRESENT"
+    },
+    {
+      "path": "results/paperB_uncertainty/metrics/all_experiments_summary.json",
+      "type": "metrics",
+      "sha256": "1c88fa874039c8d816ede6e9e25054a69f5d71198b8965d954f49fbe1cb56cec",
+      "size_bytes": 241,
+      "status": "PRESENT"
+    },
+    {
+      "path": "reports/paperB_uncertainty/00_novelty_and_prior_art.md",
+      "type": "report",
+      "sha256": "8033508de127dd62aa98d4809965c25a603dd7b9a049dbe57525af2928438116",
+      "size_bytes": 16931,
+      "status": "PRESENT"
+    },
+    {
+      "path": "reports/paperB_uncertainty/01_data_checkpoint_provenance.md",
+      "type": "report",
+      "sha256": "b950b77a38a638b021b3712072f5599d115f44419a4819ecbf3f19054e93599b",
+      "size_bytes": 8985,
+      "status": "PRESENT"
+    },
+    {
+      "path": "reports/paperB_uncertainty/02_preregistered_protocol.md",
+      "type": "report",
+      "sha256": "3fb52ecac6296d543e0bdd460c728d7e03b94c0b7f6a2a70b0849cfdd4922559",
+      "size_bytes": 10654,
+      "status": "PRESENT"
+    },
+    {
+      "path": "reports/paperB_uncertainty/03_geological_failure_analysis.md",
+      "type": "report",
+      "sha256": "a961ac42b233edb08fadaa01dbe52c6de9c4ec95941854f1a94bcc9f127bba96",
+      "size_bytes": 13207,
+      "status": "PRESENT"
+    },
+    {
+      "path": "reports/paperB_uncertainty/04_results_and_figures.md",
+      "type": "report",
+      "sha256": "5463b71007c6cbfa1d7438de59dfe338ae906bf39d2520404f93faec27a5997f",
+      "size_bytes": 18704,
+      "status": "PRESENT"
+    },
+    {
+      "path": "reports/paperB_uncertainty/05_claims_and_limitations_audit.md",
+      "type": "report",
+      "sha256": "acd31f4a0fb9de851163db7b70608f2e83f3ff845dfa07c0cb0cefa41d3f2f5d",
+      "size_bytes": 7282,
+      "status": "PRESENT"
+    },
+    {
+      "path": "reports/paperB_uncertainty/06_submission_readiness.md",
+      "type": "report",
+      "sha256": "eebf3748c34f1d22ea70f4cd6fbf9b0d76099f00741bfff4a9512e56f9453880",
+      "size_bytes": 4808,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/main.md",
+      "type": "manuscript",
+      "sha256": "1a1fb199781957ce3c9d89c48599c692b7bb6ca59256e087a74b6e62572a81e5",
+      "size_bytes": 24677,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/main.tex",
+      "type": "manuscript",
+      "sha256": "cf77bef915425b619e9cb83cc7032acfc25581b52155443629698f016039e61b",
+      "size_bytes": 10716,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/references.bib",
+      "type": "manuscript",
+      "sha256": "fd6d06f5261ad131d8e2fc7d8049b1f1e8d42e1cba5e4bd58d3f4c81fffe98c4",
+      "size_bytes": 4125,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/claims_checklist.md",
+      "type": "manuscript",
+      "sha256": "8e8920c3b6c9f7098d45b4f6c95165510f2d9b809dfbb75602188b35a2f92d95",
+      "size_bytes": 4286,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/figures/fig1_decision_triage_framework.png",
+      "type": "figure",
+      "sha256": "5763a6afed8f0c4c4bd20123a7e3cf919955faa2f975fcbe09cb6f5792a9702c",
+      "size_bytes": 236367,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/figures/fig2_reliability_diagrams.png",
+      "type": "figure",
+      "sha256": "33ff9eb16e103bb653c67638159cf65a1e985dc2796c473c8a49448c1d77ebf3",
+      "size_bytes": 354016,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/figures/fig3_selective_risk_coverage.png",
+      "type": "figure",
+      "sha256": "aff52322e395dfd40ef779621919038dbe75fd86cc9632d3b5204aecee1e8d6e",
+      "size_bytes": 297264,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/figures/fig4_conformal_set_distributions.png",
+      "type": "figure",
+      "sha256": "ce5a4ce0719267611f5be64059f7ed2c946006b75783079c5525df28d99424a3",
+      "size_bytes": 230966,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/figures/fig5_per_class_calibration_referral.png",
+      "type": "figure",
+      "sha256": "6377ce682a3e953868657e062fc3cf291f7d0e5875ee1b08045343622a72ddc9",
+      "size_bytes": 338456,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/figures/fig6_geological_error_panel.png",
+      "type": "figure",
+      "sha256": "572fbd138fd3c874073811b49806476db5e38f8939873f309ee7a6265b424dfd",
+      "size_bytes": 4516340,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/tables/table1_dataset_partitions.csv",
+      "type": "table",
+      "sha256": "cad301872c1b883eb7e4eb67eed20dcabf307126ddcf6e90f734a6c46075b167",
+      "size_bytes": 1301,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/tables/table2_calibration_metrics.csv",
+      "type": "table",
+      "sha256": "571b6d46881ae3ce95d584ccf9c0033c8c4535952f85da2de9cf66c045775d40",
+      "size_bytes": 2182,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/tables/table3_selective_risk_operating_points.csv",
+      "type": "table",
+      "sha256": "2d5b173736a0f12be3a34e145f4972f774c7c07c1d3b229f3d4af743412e8da1",
+      "size_bytes": 1127,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/tables/table4_conformal_prediction_triage.csv",
+      "type": "table",
+      "sha256": "b74fe8060e0868aa0f67ce6ae57e6cce70248a17714c09bc1eb73d5c4919866f",
+      "size_bytes": 1816,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/tables/table5_deduplication_sensitivity.csv",
+      "type": "table",
+      "sha256": "7060281692f9686a3671782b232c47a0d46f25387960919c153a303796a16b9b",
+      "size_bytes": 547,
+      "status": "PRESENT"
+    },
+    {
+      "path": "manuscript/paperB_uncertainty/tables/table6_per_class_referral_taxonomy.csv",
+      "type": "table",
+      "sha256": "8b9f47f155e7dd97636cae371b14d5cdf69aa70a62aa10bc76192a474b7e5a40",
+      "size_bytes": 1917,
+      "status": "PRESENT"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+dataset,train_accuracy,train_macro_f1,val_accuracy,val_macro_f1,test_accuracy,test_macro_f1,iterations,warnings
+DCID-512-7,0.9998015873015873,0.9998018935623921,0.9996428571428572,0.9996361093290334,0.9991428571428571,0.9991426393182491,100,The max_iter was reached which means the coef_ did not converge
+DCID-512-35,0.9988888888888889,0.9988916379017702,0.9885673454805287,0.9882903446288162,0.9928571428571429,0.9928497873052058,100,The max_iter was reached which means the coef_ did not converge

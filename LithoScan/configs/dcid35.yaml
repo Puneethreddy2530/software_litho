@@ -1,0 +1,170 @@
+# =============================================================================
+# LithoScan — DCID-35 Experiment Configuration
+# =============================================================================
+# Covers:
+#   Experiment B  — DCID-35 fine-grained classifier
+#   Experiment C  — clean vs noisy/defective robustness (35-class variant)
+#   Experiment D  — artifact-bias mitigation (35-class variant)
+#   Experiment E  — Server Edition vs Field Edition (35-class)
+#   Experiment F  — centralized vs federated training (35-class)
+#   Experiment G  — Byzantine-robust aggregation (35-class)
+#   Experiment H  — conformal prediction calibration (35-class)
+#
+# NOTE: No training has been run yet. All model blocks are marked TODO.
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# Dataset
+# ---------------------------------------------------------------------------
+dataset:
+  version: "DCID-512-35"
+  num_classes: 35
+  dcid_root: "C:/Users/punee/Desktop/Software_lithology/DCID/DCID"
+  noise_version: "noise-512-35"
+  train_split: "train"
+  test_split:  "test"
+
+# ---------------------------------------------------------------------------
+# Preprocessing & augmentation
+# ---------------------------------------------------------------------------
+preprocessing:
+  image_size: 512
+  normalize_mean: [0.485, 0.456, 0.406]
+  normalize_std:  [0.229, 0.224, 0.225]
+
+augmentation:
+  enabled: true
+  horizontal_flip: true
+  vertical_flip:   true
+  rotation_degrees: 15
+  color_jitter:
+    brightness: 0.2
+    contrast:   0.2
+    saturation: 0.1
+    hue:        0.05
+
+# ---------------------------------------------------------------------------
+# DataLoader
+# ---------------------------------------------------------------------------
+dataloader:
+  batch_size: 32               # may need to reduce to 16 for 35-class at 512px
+  num_workers: 4
+  pin_memory: true
+  seed: 42
+  persistent_workers: true
+
+# ---------------------------------------------------------------------------
+# Experiment B — Fine-Grained Classifier (centralized, clean data)
+# ---------------------------------------------------------------------------
+experiment_B:
+  name: "DCID35_finegrained"
+  description: "Centralized training on clean DCID-35 images (35 fine-grained classes)."
+  dataset_version: "DCID-512-35"
+  # TODO: fill in once model architecture is chosen
+  model:
+    architecture: "TODO"       # fine-grained recognition likely needs attention mechanisms
+    pretrained: true
+    freeze_backbone: false
+  training:
+    epochs: 60
+    optimizer: "AdamW"
+    learning_rate: 5.0e-5      # lower LR for fine-grained task
+    weight_decay: 1.0e-4
+    lr_scheduler: "CosineAnnealingLR"
+    early_stopping_patience: 10
+    label_smoothing: 0.1       # recommended for fine-grained tasks
+  output:
+    checkpoint_dir: "checkpoints/exp_B"
+    log_dir: "reports/exp_B"
+
+# ---------------------------------------------------------------------------
+# Experiment C — Robustness (35-class variant)
+# ---------------------------------------------------------------------------
+# Uses only the four official DCID dataset variants.
+# No synthetic noise injection or RWDA — noise-512-35 already contains
+# real-world defective samples from the dataset authors.
+experiment_C:
+  name: "DCID35_robustness"
+  description: |
+    Robustness evaluation using official dataset variants (35-class).
+    Two evaluation conditions:
+      1. clean train  → clean test  (DCID-512-35 train → DCID-512-35 test)
+      2. clean train  → noise test  (DCID-512-35 train → noise-512-35 test)
+    The model is trained only on clean data; no noise is injected into training.
+  train_dataset: "DCID-512-35"
+  eval_conditions:
+    - name: "clean_to_clean"
+      eval_dataset: "DCID-512-35"
+    - name: "clean_to_noise"
+      eval_dataset: "noise-512-35"
+
+# ---------------------------------------------------------------------------
+# Experiment D — Artifact-Bias Mitigation (35-class)
+# ---------------------------------------------------------------------------
+experiment_D:
+  name: "DCID35_artifact_bias"
+  description: "Artifact-bias mitigation for fine-grained 35-class task."
+  artifact_types: ["crack", "mud", "scale_bar"]
+  mitigation_strategy: "TODO"
+
+# ---------------------------------------------------------------------------
+# Experiment E — Server vs Field (35-class)
+# ---------------------------------------------------------------------------
+experiment_E:
+  name: "DCID35_server_vs_field"
+  description: "CNN+Transformer (Server) vs SNN (Field) on 35-class task."
+  server_edition:
+    model_type: "cnn_transformer_fusion"
+  field_edition:
+    model_type: "spiking_neural_network"
+
+# ---------------------------------------------------------------------------
+# Experiment F — Centralized vs Federated (35-class)
+# ---------------------------------------------------------------------------
+experiment_F:
+  name: "DCID35_centralized_vs_federated"
+  sites: ["site_A", "site_B", "site_C"]
+  data_distribution: "non_iid"   # 35 classes across 3 sites — likely non-IID
+  federated_rounds: 30
+  local_epochs: 3
+  aggregation: "FedAvg"
+
+# ---------------------------------------------------------------------------
+# Experiment G — Byzantine-Robust (35-class)
+# ---------------------------------------------------------------------------
+experiment_G:
+  name: "DCID35_byzantine_robust"
+  aggregation_methods: ["FedAvg", "Krum", "TrimmedMean", "Bulyan"]
+  byzantine_fraction: 0.2
+  attack_types: ["label_flip", "gradient_noise"]
+
+# ---------------------------------------------------------------------------
+# Experiment H — Conformal Prediction (35-class)
+# ---------------------------------------------------------------------------
+experiment_H:
+  name: "DCID35_conformal"
+  description: |
+    Calibrate conformal prediction sets on held-out calibration data (35-class).
+    The prediction-set threshold (q_hat) is computed from the calibration
+    set at the desired alpha level — it is NOT a manually chosen constant.
+    Note: average prediction set size tends to grow with more classes;
+    this is an empirical property to measure after calibration, not a preset.
+  calibration_data: "data/calibration/"
+  alpha: 0.1                  # target marginal error rate → 90% coverage guarantee
+  nonconformity_score: "softmax_margin"   # or "softmax_aps"
+  # NOTE: triage_threshold is intentionally absent.
+  # The threshold q_hat is derived from the calibration set via the
+  # conformal quantile formula: q_hat = quantile(scores, ceil((n+1)*(1-alpha))/n)
+  # Do not hard-code this value — it depends on the calibration distribution.
+
+# ---------------------------------------------------------------------------
+# Paths
+# ---------------------------------------------------------------------------
+paths:
+  manifest:    "data/manifests/dcid_manifest.csv"
+  reports:     "reports/"
+  figures:     "reports/figures/"
+  checkpoints: "checkpoints/"
+  calibration: "data/calibration/"
+  site_data:   "data/site_data/"
+  final_test:  "data/final_test/"

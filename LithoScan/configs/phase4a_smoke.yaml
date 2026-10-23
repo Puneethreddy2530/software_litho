@@ -1,0 +1,48 @@
+# =============================================================================
+# Phase 4A: Memory-Aware Smoke Test Configuration (RTX 3050 6GB)
+# =============================================================================
+
+dataset:
+  version: "DCID-512-7"
+  num_classes: 7
+  dcid_root: "C:/Users/punee/Desktop/Software_lithology/DCID/DCID"
+  train_split: "train"
+  test_split: "test"
+
+preprocessing:
+  image_size: 512
+  normalize_mean: [0.485, 0.456, 0.406]
+  normalize_std:  [0.229, 0.224, 0.225]
+
+augmentation:
+  enabled: true
+  horizontal_flip: true
+  vertical_flip: true
+  rotation_degrees: 15
+
+dataloader:
+  batch_size: 4             # Optimized for 6GB VRAM
+  num_workers: 2            # Reduced for smoke test
+  pin_memory: true
+  seed: 42
+  persistent_workers: true
+
+model:
+  architecture_mode: "cnn_transformer"
+  pretrained: true
+  embed_dim: 512
+  num_heads: 8
+  num_layers: 2
+  dropout: 0.1
+
+training:
+  epochs: 1                 # SMOKE TEST ONLY
+  optimizer: "AdamW"
+  learning_rate: 1.0e-4
+  weight_decay: 1.0e-4
+  amp: true                 # Essential for 6GB VRAM
+  gradient_accumulation: 4
+
+output:
+  checkpoint_dir: "checkpoints/phase4"
+  log_dir: "reports/phase4"

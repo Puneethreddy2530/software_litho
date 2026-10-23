@@ -1,0 +1,38 @@
+# Phase 6 SNN Bounded Pilot Configuration
+# Strictly bounded feasibility study on DCID-7 (<=10% training subset, <=3 epochs, validation-only)
+
+experiment:
+  name: "phase6_snn_pilot_dcid7"
+  phase: "phase6"
+  description: "Bounded SNN learning feasibility pilot on 10% DCID-7 training data"
+  seed: 42
+
+data:
+  dataset_root: "C:/Users/punee/Desktop/Software_lithology/DCID/DCID/DCID-512-7"
+  image_size: 224
+  num_classes: 7
+  subset_fraction: 0.10    # 10% of training set (2,520 images total, 360/class)
+  val_split_fraction: 0.10 # Deterministic validation split from train directory
+  batch_size: 16
+  num_workers: 2
+
+model:
+  architecture: "ConvSNN4"
+  time_steps: 4
+  tau: 2.0
+  v_threshold: 1.0
+  surrogate: "fast_sigmoid"
+  surrogate_k: 25.0
+  dropout: 0.2
+
+training:
+  epochs: 3               # Strictly bounded pilot: maximum 3 epochs
+  lr: 0.001
+  weight_decay: 0.0001
+  amp: true               # Mixed precision training
+  eval_on_official_test: false # SAFETY RULE: NEVER evaluate on official test
+
+checkpoint:
+  checkpoint_dir: "checkpoints/phase6_snn_pilot"
+  save_last: true
+  save_best: true

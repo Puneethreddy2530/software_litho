@@ -1,0 +1,11 @@
+,precision,recall,f1-score,support
+1.Red sandstone,1.0,1.0,1.0,1000.0
+2.Light sandstone,1.0,1.0,1.0,1000.0
+3.Gray siltstone,1.0,1.0,1.0,1000.0
+4.Mudstone,1.0,1.0,1.0,1000.0
+5.Granite,1.0,1.0,1.0,1000.0
+6.Basalt,1.0,1.0,1.0,1000.0
+7.Marble,1.0,1.0,1.0,1000.0
+accuracy,1.0,1.0,1.0,1.0
+macro avg,1.0,1.0,1.0,7000.0
+weighted avg,1.0,1.0,1.0,7000.0
