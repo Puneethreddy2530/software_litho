@@ -90,24 +90,65 @@ Software_lithology/
 
 ### The Four DCID Sub-directories
 
-| Directory | Classes | Images/class | Format | Description |
-|-----------|--------:|-------------:|--------|-------------|
-| `DCID-512-7`  |  7 | 4,000 train + 1,000 test | JPG 512×512 | 7 coarse lithology classes — clean images |
-| `DCID-512-35` | 35 | varies (see manifest)    | JPG 512×512 | 35 fine-grained classes — clean images |
-| `noise-512-7` |  7 | mirrors DCID-512-7       | JPG 512×512 | Real-world defective variants (cracks, mud, scale-bars) — 7 classes |
-| `noise-512-35`| 35 | mirrors DCID-512-35      | JPG 512×512 | Real-world defective variants — 35 classes |
+| Directory | Classes | Train Images | Test Images | Total Images | Format & Resolution | Description |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| `DCID-512-7`  |  7 | 28,000 | 7,000 | **35,000** | RGB JPEG 512×512 | 7 coarse lithology classes — clean images (4,000 train / 1,000 test) |
+| `DCID-512-35` | 35 | 27,999 | 7,000 | **34,999** | RGB JPEG 512×512 | 35 fine-grained petrographic classes (~800 train / 200 test) |
+| `noise-512-7` |  7 | 11,200 | 2,800 | **14,000** | RGB JPEG 512×512 | Real-world defective variants (cracks, mud, scale-bars) — 7 classes |
+| `noise-512-35`| 35 | 11,200 | 2,800 | **14,000** | RGB JPEG 512×512 | Real-world defective variants — 35 fine-grained classes |
+| **Total** | — | **78,399** | **19,600** | **97,999** | — | **3.56 GB uncompressed (3.82 GB zip)** |
 
-**DCID-7 Class Names** (in label order):
+#### DCID-7 Class Names & Distributions:
 
-| ID | Class |
-|----|-------|
-| 0 | Red sandstone |
-| 1 | Light sandstone |
-| 2 | Gray siltstone |
-| 3 | Mudstone |
-| 4 | Granite |
-| 5 | Basalt |
-| 6 | Marble |
+| ID | Class Name | Rock Group | Train | Test | Total |
+|:--:| :--- | :--- | :---:| :---:| :---:|
+| 0 | `1.Red sandstone` | Sedimentary (Siliciclastic) | 4,000 | 1,000 | 5,000 |
+| 1 | `2.Light sandstone` | Sedimentary (Siliciclastic) | 4,000 | 1,000 | 5,000 |
+| 2 | `3.Gray siltstone` | Sedimentary (Fine-grained) | 4,000 | 1,000 | 5,000 |
+| 3 | `4.Mudstone` | Sedimentary (Argillaceous) | 4,000 | 1,000 | 5,000 |
+| 4 | `5.Granite` | Igneous (Plutonic Felsic) | 4,000 | 1,000 | 5,000 |
+| 5 | `6.Basalt` | Igneous (Volcanic Mafic) | 4,000 | 1,000 | 5,000 |
+| 6 | `7.Marble` | Metamorphic (Non-foliated) | 4,000 | 1,000 | 5,000 |
+
+#### DCID-35 Fine-Grained Classes:
+
+| ID | Class Name | Rock Supergroup | Primary Description |
+|:--:| :--- | :--- | :--- |
+| 1 | `1.Red sandstone` | Sedimentary | Ferruginous quartz sandstone |
+| 2 | `2.Light sandstone` | Sedimentary | Pale feldspathic/quartzose sandstone |
+| 3 | `3.Gray-green sandstone` | Sedimentary | Chloritic/glauconitic greenish sandstone |
+| 4 | `4.Gray siltstone` | Sedimentary | Intermediate grain-size siltstone |
+| 5 | `5.Brown siltstone` | Sedimentary | Limonitic/oxidized siltstone |
+| 6 | `6.Carbonaceous siltstone`| Sedimentary | Organic-rich dark silty laminae |
+| 7 | `7.Mudstone` | Sedimentary | Massive micro-grained argillaceous rock |
+| 8 | `8.Granite` | Igneous (Plutonic) | Equigranular quartz-feldspar plutonic |
+| 9 | `9.Megacrystic granite` | Igneous (Plutonic) | Porphyritic with large K-feldspar crystals |
+| 10 | `10.Monzogranite` | Igneous (Plutonic) | Equal alkali feldspar and plagioclase |
+| 11 | `11.Fine-grained granite` | Igneous (Plutonic) | Microcrystalline felsic intrusive rock |
+| 12 | `12.Pegmatite` | Igneous (Intrusive) | Giant crystalline texture (>1 cm crystals) |
+| 13 | `13.Basalt` | Igneous (Extrusive) | Mafic volcanic rock with plagioclase |
+| 14 | `14.Fine-grained basalt` | Igneous (Extrusive) | Dense aphanitic basalt |
+| 15 | `15.Gabbro` | Igneous (Plutonic) | Coarse-grained mafic intrusive rock |
+| 16 | `16.Dolerite` | Igneous (Subvolcanic) | Medium-grained diabase/dolerite dike rock |
+| 17 | `17.White marble` | Metamorphic | Pure recrystallized calcite limestone |
+| 18 | `18.Blue marble` | Metamorphic | Calcite marble with trace graphite |
+| 19 | `19.Dolomite` | Sedimentary/Meta | Magnesium-rich carbonate |
+| 20 | `20.Black Shale` | Sedimentary | Highly fissile, sapropelic source rock |
+| 21 | `21.Red shale` | Sedimentary | Oxidized fissile argillaceous shale |
+| 22 | `22.Dark green calc-silicate` | Metamorphic | Contact metamorphic epidote/diopside rock |
+| 23 | `23.Brown calc-silicate` | Metamorphic | Grossular garnet-vesuvianite contact rock |
+| 24 | `24.Skarn` | Metamorphic | Hydrothermal calc-silicate replacement |
+| 25 | `25.Red-brown dacite` | Igneous (Extrusive) | Intermediate volcanic with phenocrysts |
+| 26 | `26.Black dacite` | Igneous (Extrusive) | Melanocratic glassy dacitic volcanic |
+| 27 | `27.Rhyolite` | Igneous (Extrusive) | Felsic extrusive volcanic with flow banding |
+| 28 | `28.Banded iron formation`| Sedimentary/Meta | Alternating silica (chert) and iron oxide bands |
+| 29 | `29.Hematite breccia` | Tectonic/Hydrothermal | Angular fragments cemented by hematite |
+| 30 | `30.Altered breccia` | Hydrothermal | Hydrothermally altered cataclastic breccia |
+| 31 | `31.Schist` | Metamorphic (Foliated) | Planar foliation with visible mica flakes |
+| 32 | `32.Gneiss` | Metamorphic (Banded) | Alternating felsic and mafic banding |
+| 33 | `33.Porphyry` | Igneous (Subvolcanic) | Distinct phenocrysts in fine groundmass |
+| 34 | `34.Brecciated mudstone` | Sedimentary/Tectonic | Mechanically fractured mudstone clasts |
+| 35 | `35.Shale fragments` | Sedimentary/Drilling | Drill-damaged disintegrated shale |
 
 ### Official Train/Test Split Rule
 

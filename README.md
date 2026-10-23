@@ -64,71 +64,189 @@ python start.py
 
 ---
 
-## Dataset: DCID (Links & Setup)
+## Dataset: DCID (Drill Core Image Dataset)
 
-The system is evaluated on the **Drill Core Image Dataset (DCID)** published in *Petroleum Science* (2025):
-- **98,000** high-resolution ($512 \times 512$) core photos.
-- **DCID-7**: 7 coarse lithology classes (Red sandstone, Light sandstone, Gray siltstone, Mudstone, Granite, Basalt, Marble).
-- **DCID-35**: 35 fine-grained lithology classes.
-- **Defective Cohorts (`noise-512-7` & `noise-512-35`)**: Real-world core artifacts including fractures, mud smear, and optical scale markers.
+The **Drill Core Image Dataset (DCID)** is a large-scale, high-resolution geological benchmark constructed to accelerate automated borehole logging and subsurface lithology characterization. Released in *Petroleum Science* (2025), it contains **97,999** verified $512 \times 512$ RGB images captured under standardized optical imaging conditions.
 
-### Official Dataset Download Links
+### Official Publication & Dataset Access Links
 
-* **Hugging Face Hub (Direct Download & Dataset Viewer):**  
+* **Primary Research Article:**  
+  *A large-scale, high-quality dataset for lithology identification: Construction and applications.*  
+  **Petroleum Science**, 2025. ISSN: 1995-8226.  
+  DOI: [10.1016/j.petsci.2025.04.013](https://doi.org/10.1016/j.petsci.2025.04.013)
+
+* **Hugging Face Hub (Dataset Viewer & Download):**  
   [https://huggingface.co/datasets/168sir/drill-core-image-dataset](https://huggingface.co/datasets/168sir/drill-core-image-dataset)  
-  *Direct Archive Link (3.8 GB):* [DCID.zip Download](https://huggingface.co/datasets/168sir/drill-core-image-dataset/resolve/main/DCID.zip)
+  *Direct Download Archive (3.82 GB):* [DCID.zip (3,819,926,174 bytes)](https://huggingface.co/datasets/168sir/drill-core-image-dataset/resolve/main/DCID.zip)
 
-* **Original Dataset GitHub Repository:**  
+* **Original Authors GitHub Repository:**  
   [https://github.com/JiayuLi1120/drill-core-image-dataset](https://github.com/JiayuLi1120/drill-core-image-dataset)
 
-### Automated Download Script
+---
 
-We provide a built-in automated downloader that streams and extracts the dataset directly:
+### How to Acquire the Dataset (3 Options)
 
+#### Option 1: Automated 1-Command Python Downloader (Recommended)
+From the root of this repository, run:
 ```bash
 python download_dataset.py
 ```
+This script streams `DCID.zip` directly from Hugging Face with a live progress bar, checks data integrity, and extracts it directly into `DCID/DCID/`.
 
-### Directory Structure After Extraction
+#### Option 2: Manual Download & Extraction
+1. Download `DCID.zip` (3.82 GB) from the direct link above or via `curl`:
+   ```bash
+   curl -L -O https://huggingface.co/datasets/168sir/drill-core-image-dataset/resolve/main/DCID.zip
+   ```
+2. Extract the archive into the repository root so the layout matches `DCID/DCID/`:
+   ```bash
+   unzip DCID.zip -d DCID
+   ```
 
-Ensure the extracted folder matches the layout expected by all configs and loaders:
+#### Option 3: External Dataset Directory via Environment Variable
+If you already have DCID stored on another drive (e.g., an SSD or server partition), you do not need to duplicate files. Set `DCID_ROOT`:
+```bash
+# Windows PowerShell
+$env:DCID_ROOT = "D:\Datasets\DCID\DCID"
+
+# Windows CMD
+set DCID_ROOT=D:\Datasets\DCID\DCID
+
+# Linux / macOS
+export DCID_ROOT=/data/DCID/DCID
+```
+All training and evaluation scripts automatically detect and prioritize `DCID_ROOT`.
+
+---
+
+### The Four DCID Sub-Cohorts
+
+DCID provides four parallel directories separating coarse vs. fine-grained lithologies and clean vs. defective core states:
+
+| Directory Name | Target Classes | Train Split | Test Split | Total Images | Format & Resolution | Characteristics |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **`DCID-512-7`** | 7 coarse | 28,000 | 7,000 | **35,000** | RGB JPEG (512×512) | Standard clean core sections (4,000 train / 1,000 test per class) |
+| **`DCID-512-35`** | 35 fine | 27,999 | 7,000 | **34,999** | RGB JPEG (512×512) | Fine-grained petrographic classes (~800 train / 200 test per class) |
+| **`noise-512-7`** | 7 coarse | 11,200 | 2,800 | **14,000** | RGB JPEG (512×512) | Defective core images (cracks, mud smears, scale bars, core box borders) |
+| **`noise-512-35`** | 35 fine | 11,200 | 2,800 | **14,000** | RGB JPEG (512×512) | Defective variants across all 35 fine-grained classes (320 train / 80 test) |
+| **Total Benchmark** | — | **78,399** | **19,600** | **97,999** | — | **3.56 GB uncompressed (3.82 GB zip)** |
+
+---
+
+### Complete Class Taxonomy & Distribution
+
+#### 1. DCID-7: Coarse Lithology Classification (7 Classes)
+
+Balanced distribution: exactly **4,000 train** and **1,000 test** images per class.
+
+| Class ID | Lithology Name | Rock Group | Train | Test | Total | Visual Characteristics |
+| :---: | :--- | :--- | :---: | :---: | :---: | :--- |
+| **0** | `1.Red sandstone` | Sedimentary (Siliciclastic) | 4,000 | 1,000 | 5,000 | Ferruginous red/orange, medium-to-fine grain quartz texture |
+| **1** | `2.Light sandstone` | Sedimentary (Siliciclastic) | 4,000 | 1,000 | 5,000 | Buff/cream to pale gray, quartzose-feldspathic framework |
+| **2** | `3.Gray siltstone` | Sedimentary (Fine-grained) | 4,000 | 1,000 | 5,000 | Dark gray/charcoal, microcrystalline, laminated silty fabric |
+| **3** | `4.Mudstone` | Sedimentary (Argillaceous) | 4,000 | 1,000 | 5,000 | Homogeneous dark argillaceous matrix, non-fissile |
+| **4** | `5.Granite` | Igneous (Plutonic Felsic) | 4,000 | 1,000 | 5,000 | Phaneritic felsic intergrowth: quartz, K-feldspar, biotite |
+| **5** | `6.Basalt` | Igneous (Volcanic Mafic) | 4,000 | 1,000 | 5,000 | Aphanitic melanocratic dark gray/black mafic matrix |
+| **6** | `7.Marble` | Metamorphic (Non-foliated) | 4,000 | 1,000 | 5,000 | Recrystallized calcite/dolomite, saccharoidal granoblastic |
+
+---
+
+#### 2. DCID-35: Fine-Grained Lithology Classification (35 Classes)
+
+Uniform distribution: **800 train** and **200 test** images per class (Total: 1,000 images/class; Class 28 has 799 train + 200 test = 999).
+
+| ID | Class Directory Name | Rock Supergroup | Primary Mineralogy & Structural Description |
+| :---: | :--- | :--- | :--- |
+| **1** | `1.Red sandstone` | Sedimentary | Hematite-cemented quartz grains, fine-to-medium sand |
+| **2** | `2.Light sandstone` | Sedimentary | Pale feldspathic/quartzose sandstone, low clay content |
+| **3** | `3.Gray-green sandstone` | Sedimentary | Chloritic/glauconitic greenish sandstone |
+| **4** | `4.Gray siltstone` | Sedimentary | Intermediate grain-size between sandstone and shale |
+| **5** | `5.Brown siltstone` | Sedimentary | Limonitic/ferruginous oxidized siltstone |
+| **6** | `6.Carbonaceous siltstone`| Sedimentary | Organic-rich dark silty laminae |
+| **7** | `7.Mudstone` | Sedimentary | Massive micro-grained argillaceous sediment |
+| **8** | `8.Granite` | Igneous (Plutonic) | Equigranular quartz + alkali feldspar + plagioclase |
+| **9** | `9.Megacrystic granite` | Igneous (Plutonic) | Porphyritic with large K-feldspar phenocrysts |
+| **10** | `10.Monzogranite` | Igneous (Plutonic) | Equal proportions of alkali feldspar and plagioclase |
+| **11** | `11.Fine-grained granite` | Igneous (Plutonic) | Microcrystalline felsic intrusive rock |
+| **12** | `12.Pegmatite` | Igneous (Intrusive) | Giant crystalline texture (>1 cm crystals) |
+| **13** | `13.Basalt` | Igneous (Extrusive) | Mafic volcanic rock with plagioclase and pyroxene |
+| **14** | `14.Fine-grained basalt` | Igneous (Extrusive) | Rapidly chilled dense aphanitic basalt |
+| **15** | `15.Gabbro` | Igneous (Plutonic) | Coarse-grained mafic intrusive (plagioclase + pyroxene) |
+| **16** | `16.Dolerite` | Igneous (Subvolcanic) | Medium-grained diabase/dolerite dike rock |
+| **17** | `17.White marble` | Metamorphic | Pure recrystallized calcite limestone |
+| **18** | `18.Blue marble` | Metamorphic | Calcite marble with trace graphite/serpentine tinting |
+| **19** | `19.Dolomite` | Sedimentary/Meta | Magnesium-rich carbonate $(CaMg(CO_3)_2)$ |
+| **20** | `20.Black Shale` | Sedimentary | Highly fissile, sapropelic, high-TOC source rock |
+| **21** | `21.Red shale` | Sedimentary | Oxidized fissile argillaceous shale |
+| **22** | `22.Dark green calc-silicate` | Metamorphic | Contact metamorphic skarn/calc-silicate (epidote/diopside) |
+| **23** | `23.Brown calc-silicate` | Metamorphic | Grossular garnet-vesuvianite contact rock |
+| **24** | `24.Skarn` | Metamorphic | Hydrothermal calc-silicate replacement ore host |
+| **25** | `25.Red-brown dacite` | Igneous (Extrusive) | Intermediate volcanic with plagioclase phenocrysts |
+| **26** | `26.Black dacite` | Igneous (Extrusive) | Melanocratic glassy dacitic volcanic rock |
+| **27** | `27.Rhyolite` | Igneous (Extrusive) | Felsic extrusive volcanic with flow banding |
+| **28** | `28.Banded iron formation`| Sedimentary/Meta | Alternating silica (chert) and iron oxide (hematite/magnetite) bands |
+| **29** | `29.Hematite breccia` | Tectonic/Hydrothermal | Angular rock fragments cemented by hematite |
+| **30** | `30.Altered breccia` | Hydrothermal | Hydrothermally sericitized/argillized cataclastic breccia |
+| **31** | `31.Schist` | Metamorphic (Foliated) | Strong planar foliation with visible mica flakes |
+| **32** | `32.Gneiss` | Metamorphic (Banded) | Alternating felsic and mafic compositional banding |
+| **33** | `33.Porphyry` | Igneous (Subvolcanic) | Distinct phenocrysts embedded in fine groundmass |
+| **34** | `34.Brecciated mudstone` | Sedimentary/Tectonic | Mechanically fractured mudstone clasts |
+| **35** | `35.Shale fragments` | Sedimentary/Drilling | Drill-damaged or mechanically disintegrated shale |
+
+---
+
+### Real-World Defect Cohorts (RWDA: `noise-512-7` & `noise-512-35`)
+
+Real drill cores photographed at drilling rigs and storage core sheds contain severe environmental and mechanical interference:
+1. **Physical Fracturing & Disking:** Transverse drilling cracks, mechanical core disking, and fragmentation.
+2. **Drilling Mud Smear:** Bentonite and chemical drilling mud cakes coating the core surfaces.
+3. **Optical Artifacts:** Physical plastic/wooden millimeter and centimeter scale-bar rulers placed next to the core.
+4. **Core Box Framing:** Wooden core tray slats, foam spacers, and dark shadow gaps between core intervals.
+
+Our research framework includes automated artifact interventions:
+- **Border Masking (`mask_image_border`):** Crops the outer 8%–12% margin of images to strip away scale-bar fonts and tray edges, forcing deep networks to learn mineral crystallization rather than tray wood.
+- **dHash Near-Duplicate Audit:** Discovered **700,216** near-duplicate image pairs between train and test sets caused by consecutive camera shots along unbroken core intervals. Our evaluation suite benchmarks models under systematic neighbor exclusion ($d\text{Hash} \le 2, 5, 10$).
+
+---
+
+### Strict Split Safety (`SplitViolationError`)
+
+> ⚠️ **METHODOLOGICAL WARNING:**  
+> Standard random shuffling (e.g., `train_test_split`) on drill core images causes severe spatial autocorrelation leakage: adjacent 512×512 patches cut from the same 1-meter drill-core run share identical mineral textures and lighting.  
+> 
+> In LithoScan, all data loaders strictly enforce the official `train/` and `test/` splits. Any attempt to re-shuffle or randomly re-split raises `SplitViolationError`, guaranteeing that benchmark results reflect genuine out-of-distribution evaluation.
+
+---
+
+### Directory Layout After Extraction
 
 ```
 software_litho/
 ├── DCID/
 │   └── DCID/                          <-- DCID_ROOT
 │       ├── DCID-512-7/
-│       │   ├── train/                 (4,000 images / class)
-│       │   └── test/                  (1,000 images / class)
+│       │   ├── train/                 (28,000 images: 4,000 / class)
+│       │   └── test/                  (7,000 images: 1,000 / class)
 │       ├── DCID-512-35/
-│       │   ├── train/
-│       │   └── test/
+│       │   ├── train/                 (27,999 images: ~800 / class)
+│       │   └── test/                  (7,000 images: 200 / class)
 │       ├── noise-512-7/
-│       │   ├── train/
-│       │   └── test/
+│       │   ├── train/                 (11,200 images: 1,600 / class)
+│       │   └── test/                  (2,800 images: 400 / class)
 │       ├── noise-512-35/
-│       │   ├── train/
-│       │   └── test/
-│       └── build_dcid_dataset.py
+│       │   ├── train/                 (11,200 images: 320 / class)
+│       │   └── test/                  (2,800 images: 80 / class)
+│       └── build_dcid_dataset.py      (Authors' dataset utility)
 ├── LithoScan/
-└── README.md
+│   ├── data/
+│   │   └── manifests/
+│   │       └── dcid_manifest.csv      (Full 98k image index with MD5 hashes)
+│   ├── reports/
+│   │   └── phase3/
+│   │       ├── near_duplicate_pairs.csv.gz  (700k dHash pairs audit)
+│   │       └── class_visual_statistics.csv  (Color, contrast, entropy metrics)
+...
 ```
-
-> **Note on Custom Dataset Locations:**  
-> If your dataset is stored in an external directory or drive, simply set the environment variable:
-> ```bash
-> # Windows PowerShell
-> $env:DCID_ROOT = "D:\path\to\DCID\DCID"
-> # Windows CMD
-> set DCID_ROOT=D:\path\to\DCID\DCID
-> # Linux / macOS
-> export DCID_ROOT=/path/to/DCID/DCID
-> ```
-
-### Official Train/Test Split Rules
-
-> ⚠️ **CRITICAL SPLIT SAFETY:**  
-> Never randomly re-partition the DCID images. The benchmark requires using the official `train/` and `test/` subdirectories. Overriding the official partition raises an enforced `SplitViolationError` to prevent scientific data leakage.
 
 ---
 
